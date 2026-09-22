@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05080d">
+  <title>Borrtec | Soluções em Borracha e Silicone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+
+  <header class="topbar">
+    <div class="brand" onclick="showPage('home')">
+      <div class="brand-mark">B</div>
+      <div>
+        <strong>BORRTEC</strong>
+        <small>SOLUÇÕES EM BORRACHA E SILICONE</small>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button class="icon-btn" onclick="focusSearch()" aria-label="Buscar">⌕</button>
+      <button class="icon-btn" onclick="openLogin()" aria-label="Conta">♙</button>
+      <button class="cart-btn" onclick="showPage('cart')">🛒 <span id="cartCount">0</span></button>
+      <button class="icon-btn menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+  </header>
+
+  <div id="sideMenu" class="side-menu">
+    <button onclick="showPage('home'); toggleMenu()">⌂ Início</button>
+    <button onclick="showPage('products'); toggleMenu()">▣ Produtos</button>
+    <button onclick="showPage('orders'); toggleMenu()">▤ Meus pedidos</button>
+    <button onclick="showPage('cart'); toggleMenu()">🛒 Carrinho</button>
+    <button onclick="openLogin(); toggleMenu()">♙ Minha conta</button>
+    <button onclick="openAdminLogin(); toggleMenu()">⚙ Área administrativa</button>
+  </div>
+
+  <main id="app"></main>
+
+  <nav class="bottom-nav">
+    <button onclick="showPage('home')" data-page="home"><span>⌂</span><small>Início</small></button>
+    <button onclick="showPage('products')" data-page="products"><span>▣</span><small>Produtos</small></button>
+    <button onclick="showPage('cart')" data-page="cart"><span>🛒</span><small>Carrinho</small></button>
+    <button onclick="showPage('orders')" data-page="orders"><span>▤</span><small>Pedidos</small></button>
+    <button onclick="openContact()" data-page="contact"><span>◉</span><small>Contato</small></button>
+  </nav>
+
+  <button class="robot-fab" onclick="toggleRobot()" aria-label="Abrir assistente">
+    <span class="robot-face">🤖</span>
+    <i>•</i>
+  </button>
+
+  <div id="robotBox" class="robot-box">
+    <div class="robot-head">
+      <div><span class="robot-mini">🤖</span><strong>Borrtec Assistente</strong></div>
+      <button onclick="toggleRobot()">×</button>
+    </div>
+    <div id="robotMessages" class="robot-messages">
+      <div class="bot-msg">Olá! 👋 Sou o assistente da Borrtec. Posso ajudar você a encontrar uma peça, ver o carrinho ou acompanhar um pedido.</div>
+    </div>
+    <div class="robot-options">
+      <button onclick="robotAction('products')">🔎 Procurar produto</button>
+      <button onclick="robotAction('cart')">🛒 Meu carrinho</button>
+      <button onclick="robotAction('orders')">📦 Acompanhar pedido</button>
+      <button onclick="robotAction('contact')">💬 Atendimento</button>
+    </div>
+  </div>
+
+  <!-- Login cliente -->
+  <div id="loginModal" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal('loginModal')">×</button>
+      <div class="modal-title"><span class="yellow-icon">♙</span><div><h2>Minha conta</h2><p>Entre para comprar e acompanhar pedidos.</p></div></div>
+      <label>E-mail<input id="loginEmail" type="email" placeholder="voce@email.com"></label>
+      <label>Senha<input id="loginPassword" type="password" placeholder="••••••••"></label>
+      <button class="primary full" onclick="customerLogin()">ENTRAR</button>
+      <p class="switch-text">Ainda não possui conta? <button onclick="showRegister()">Criar conta</button></p>
+    </div>
+  </div>
+
+  <!-- Cadastro -->
+  <div id="registerModal" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal('registerModal')">×</button>
+      <div class="modal-title"><span class="yellow-icon">+</span><div><h2>Criar conta</h2><p>Cadastre-se para fazer seus pedidos.</p></div></div>
+      <label>Nome completo<input id="regName" placeholder="Seu nome"></label>
+      <label>E-mail<input id="regEmail" type="email" placeholder="voce@email.com"></label>
+      <label>Telefone<input id="regPhone" placeholder="(19) 99999-9999"></label>
+      <label>CPF ou CNPJ<input id="regDocument" inputmode="numeric" placeholder="CPF ou CNPJ"></label>
+      <label>Senha<input id="regPassword" type="password" placeholder="Crie uma senha"></label>
+      <button class="primary full" onclick="registerCustomer()">CRIAR CONTA</button>
+      <p class="switch-text">Já possui conta? <button onclick="openLogin()">Entrar</button></p>
+    </div>
+  </div>
+
+  <!-- Admin login -->
+  <div id="adminLoginModal" class="modal">
+    <div class="modal-card admin-login">
+      <button class="close" onclick="closeModal('adminLoginModal')">×</button>
+      <div class="modal-title"><span class="yellow-icon">⚙</span><div><h2>Área administrativa</h2><p>Acesso seguro em preparação.</p></div></div>
+      <label>E-mail<input id="adminEmail" type="email" autocomplete="username" placeholder="E-mail do administrador"></label>
+      <label>Senha<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Senha"></label>
+      <button class="primary full" onclick="adminLogin()">ENTRAR NO PAINEL</button>
+      <div class="demo-note">A autenticação administrativa será conectada ao backend seguro antes da publicação.</div>
+    </div>
+  </div>
+
+  <div id="adminPanel" class="admin-panel"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
